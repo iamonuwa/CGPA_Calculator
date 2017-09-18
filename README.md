@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
 
 ## How to use this template
@@ -24,3 +25,7 @@ $ ionic cordova run ios
 
 Substitute ios for android if not on a Mac.
 
+=======
+# cgpa
+CGPA is an ionic 4 app that calculates  the cumulative grades for students in  nigerian universities using their course grades
+>>>>>>> 5c0f715e506716e2b18196069cd3647310ea7d19
