@@ -1,14 +1,114 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Component} from '@angular/core';
+import { NavController, LoadingController,ToastController } from 'ionic-angular';
+import { DatabaseServiceProvider } from '../../providers/database-service/database-service';
+import { DepartmentPage } from '../department/department';
+import { LocalStorageProvider } from '../../providers/local-storage/local-storage';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
+	private universityList;
+	private deparmentList;
+	private coursesList;
+	private deptPage;
+	private loader;
+  private levelList;
+  	constructor(
+  		public navCtrl: NavController, 
+  		private _db: DatabaseServiceProvider, 
+  		public loadingCtrl: LoadingController,
+  		public localStorage: LocalStorageProvider
+  		) 
+  	{
+  		this.getUniversities();
+  		this.deptPage = DepartmentPage;
+  	}
 
-  constructor(public navCtrl: NavController) {
+  	addUni(data)
+  	{
+  		this._db.addUniversity(data)
+  	}
+  	addDept(uni, course, desc)
+  	{
+  		let data ={uni_id: uni, name: course, description: desc}
+  		this._db.addDept(data)
+  	}
+  	addLevels(uni, level, desc)
+  	{
+  		let data ={dept_id: uni, name: level, description: desc}
+  		this._db.addLevels(data)
+  	}
+  	addCourse(dept,level, course, course_unit)
+  	{
+  		let data ={dept_id: dept,level_id: level, name: course, unit:course_unit}
+  		this._db.addCourse(data)
+  	}
 
-  }
+  	getUniversities()
+  	{
+  		this.loader = this.loadingCtrl.create({
+	      content: 'Please wait.. loading school',
+	      spinner: 'crescent'
+	    });
+	    this.loader.present();
+  		this._db.getUniversity().subscribe((response) =>{
+  			if(response)
+		    {
+		        this.loader.dismissAll();
+  				this.universityList = response;
+		    }
+  			
+  		})
+  	}
+  	getDepartment(data)
+  	{
+  		console.log(data)
+  		if(data)
+  		{
+  			this._db.getDepartment(data).subscribe((response) =>{
+  			console.log(response)
+  			this.deparmentList = response;
+  		})
+  		}
+  	}
+  	getCourses(data)
+  	{
+  		console.log(data)
+  		if(data)
+  		{
+  			this._db.getCourses(data).subscribe((response) =>{
+  			console.log(response)
+  			this.coursesList = response;
+  		})
+  		}
+  	}
 
+  	getDepartmentPage(data)
+  	{
+    	if(data)
+    	{
+    		this.navCtrl.push(this.deptPage, {sch_id: data});
+    	}else{
+    		this.localStorage.showToast('Please select a School', 'bottom');
+    	}
+  	}
+    getLevels(data)
+    {
+      console.log(data)
+      this.loader = this.loadingCtrl.create({
+        content: 'Please wait.. loading Courses',
+        spinner: 'crescent'
+      });
+      this.loader.present();
+      if(data)
+      {
+        this._db.getLevels(data).subscribe((response) =>{
+        this.levelList = response;
+        console.log(this.levelList)
+        this.loader.dismissAll();
+      })
+      }
+    }
 }

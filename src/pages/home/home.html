@@ -3,16 +3,121 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>Welcome</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+ <!--  <h3>Ionic Menu Starter</h3>
 
   <p>
     If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
   </p>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <button ion-button secondary menuToggle>Toggle Menu</button> -->
+  
+ <!--  Add university
+  <ion-row>
+    <ion-col>
+      <ion-input type="text" placeholder="add uni" name="" #university></ion-input>
+    </ion-col>
+    <ion-col>
+    <button ion-button (click)="addUni(university.value)"> add</button>
+    </ion-col>
+  </ion-row> -->
+
+<!-- add dept
+ <ion-row>
+    <ion-col>
+      <ion-select #university>
+        <ion-label>School</ion-label>
+          <ion-option *ngFor="let item of universityList" value="{{item.$key}}">{{item.$value}}</ion-option>
+        </ion-select>
+      <ion-input type="text" placeholder="add course" name="" #course></ion-input>
+      <ion-input type="text" placeholder="desc" name="" #desc></ion-input>
+    </ion-col>
+    <ion-col>
+    <button ion-button (click)="addDept(university.value, course.value, desc.value)"> add</button>
+    </ion-col>
+  </ion-row>
+ -->
+     
+  <!-- add course
+    <ion-list>
+      <ion-item>
+        <ion-select [(ngModel)]="uni" (ionChange) = "getDepartment(uni)">
+        <ion-label>School</ion-label>
+          <ion-option *ngFor="let item of universityList" value="{{item.$key}}">{{item.$value}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+         <ion-select [(ngModel)]="dept" (ionChange) = "getLevels(dept)" interface="popover">
+          <ion-option *ngFor="let item of deparmentList" value="{{item.$key}}">{{item.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+         <ion-select [(ngModel)]="level" interface="popover">
+          <ion-option *ngFor="let item of levelList" value="{{item.$key}}">{{item.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+              <ion-input type="text" placeholder="add course" name="" #course></ion-input>
+      </ion-item>
+      <ion-item>
+              <ion-input type="text" placeholder="course unit" name="" #course_unit></ion-input>
+      </ion-item>
+      <button ion-button (click)="addCourse(dept, level,course.value, course_unit.value)"> add</button>
+    </ion-list> -->
+  
+ <!-- <ion-list>
+  add level
+      <ion-item>
+        <ion-select [(ngModel)]="uni" (ionChange) = "getDepartment(uni)">
+        <ion-label>School</ion-label>
+          <ion-option *ngFor="let item of universityList" value="{{item.$key}}">{{item.$value}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+         <ion-select [(ngModel)]="dept" (ionChange) = "getCourses(dept)" interface="popover">
+          <ion-option *ngFor="let item of deparmentList" value="{{item.$key}}">{{item.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+              <ion-input type="text" placeholder="level" name="" #level></ion-input>
+      </ion-item>
+      <ion-item>
+              <ion-input type="text" placeholder="description" name="" #desc></ion-input>
+      </ion-item>
+      <button ion-button (click)="addLevels(dept, level.value, desc.value)"> add</button>
+    </ion-list> -->
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <ion-list>
+      <ion-item>
+        <ion-label>School</ion-label>
+        <ion-select [(ngModel)]="uni" interface="popover">
+          <ion-option *ngFor="let item of universityList" value="{{item.$key}}">{{item.$value}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <!-- <ion-item>
+        <ion-label>Department</ion-label>
+        <ion-select [(ngModel)]="dept" (ionChange) = "getCourses(dept)" interface="popover">
+          <ion-option *ngFor="let item of deparmentList" value="{{item.$key}}">{{item.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Department</ion-label>
+        <ion-select [(ngModel)]="course" interface="popover">
+          <ion-option *ngFor="let item of deparmentList" value="{{item.$key}}">{{item.name}}</ion-option>
+        </ion-select>
+      </ion-item> -->
+      <button ion-button outline block (click) = "getDepartmentPage(uni)">Submit</button>
+    </ion-list>
+  
 </ion-content>
