@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,  LoadingController,ToastController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { DatabaseServiceProvider } from '../../providers/database-service/database-service';
-import { DepartmentPage } from '../department/department';
-import { LocalStorageProvider } from '../../providers/local-storage/local-storage';
+//import { LocalStorageProvider } from '../../providers/local-storage/local-storage';
 /**
  * Generated class for the CgpCalculatorPage page.
  *
@@ -29,7 +28,7 @@ export class CgpCalculatorPage {
 		private _db: DatabaseServiceProvider, 
 		public loadingCtrl: LoadingController,
 	    private _fb: FormBuilder,
-		public localStorage: LocalStorageProvider
+		//public localStorage: LocalStorageProvider
   		) {
   		this.dept_id = this.navParams.get('dept_id');
   		this.level_id = this.navParams.get('level_id');
