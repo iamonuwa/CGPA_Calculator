@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="secondary">
     <ion-title>cgp-calculator</ion-title>
   </ion-navbar>
 
@@ -14,5 +14,67 @@
 
 
 <ion-content padding>
+	<form [formGroup] = "cgpForm" (ngSubmit)="addMultiClassFees(cgpForm.value)">
+		
+		<div formArrayName="fees" *ngFor="let item of cgpForm.get('fees').controls; let i = index;">
+		  <div [formGroupName]="i">
+		  	<ion-grid>
+		  		<ion-row>
+					<ion-col>
+						<ion-item>
+					        <ion-label floating>Courses</ion-label>
+					        <ion-select formControlName="ledger_id" interface="popover">
+					          <ion-option *ngFor="let item of courseList" value="{{item.$key}}">{{item.name}}</ion-option>
+					        </ion-select>
+					    </ion-item>
+					</ion-col>
+				</ion-row>
+		  	</ion-grid>
 
+			<ion-row>
+				<ion-col>
+					<ion-item>
+				        <ion-label floating>Quiz Score</ion-label>
+				        <ion-input type="text" formControlName="amount" name="" #course_unit></ion-input>
+				    </ion-item>
+				</ion-col>
+				<ion-col>
+					<ion-item>
+				        <ion-label floating>Exam Score</ion-label>
+              			<ion-input type="text" formControlName="description" name="" #course_unit></ion-input>
+				    </ion-item>
+				</ion-col>
+				<button ion-button outline color="secondary" type="button" style="margin: auto;" (click)="deleteItem(i)"><ion-icon name="remove"></ion-icon></button>
+		</ion-row>
+		    
+		    
+		    
+		  </div>
+	</div>
+<!-- 	<div class="col-md-12">
+		<div class="row">
+			<div class="col-md-6">
+				<button type="submit" class="btn btn-primary" [disabled]="cgpForm.invalid || submitPending ">
+		        	<span *ngIf="!submitPending">Submit</span>
+		        	<span *ngIf="submitPending && cgpForm.valid">Please Wait...</span>
+		        	<span *ngIf="submitPending && cgpForm.valid" class="fa fa-spinner" aria-hidden="true"></span>
+		    	</button>
+			</div>
+			<div class="col-md-2"></div>
+			<div class="col-md-2"></div>
+			<div class="col-md-2">
+				<div class="text-left">
+		  			<button class="btn btn-success btn-md" type="button" (click)="addItem()"><i class="fa fa-plus"></i></button>
+		  		</div>
+			</div>
+		</div>
+	</div> -->
+	</form>
 </ion-content>
+<ion-footer>
+		<ion-toolbar>
+			<button ion-button outline color="secondary" (click)="addItem()"><ion-icon name="ios-add"></ion-icon></button>
+			<button ion-button outline  color="secondary"><i class="fa fa-plus"></i>Spillover</button>
+			<button ion-button outline  color="secondary" (click)="addItem()"><i class="fa fa-plus"></i>Done</button>
+		</ion-toolbar>
+	</ion-footer>

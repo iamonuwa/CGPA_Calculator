@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="secondary">
     <ion-title>Department</ion-title>
   </ion-navbar>
 
@@ -33,7 +33,7 @@
 	          <ion-option *ngFor="let course of levelList" value="{{course.$key}}">{{course.name}}</ion-option>
 	        </ion-select>
 	      </ion-item>
-	      <button type="submit" ion-button outline block>Submit</button>
+	      <button type="submit" ion-button outline block color="secondary">Submit</button>
 		</ion-list>
 	</form>
 </ion-content>

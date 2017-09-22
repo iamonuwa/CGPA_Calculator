@@ -43,8 +43,8 @@ export class DatabaseServiceProvider {
     {
       return this.db.list('/courses', {
         query: {
-          orderByChild: 'dept_id',
-          equalTo: data
+          orderByChild: 'level_id',
+          equalTo: data,
           //startAt: data
         }
       });//.map(response => {response});

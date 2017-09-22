@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { NavController, LoadingController,ToastController } from 'ionic-angular';
+import { NavController, LoadingController } from 'ionic-angular';
 import { DatabaseServiceProvider } from '../../providers/database-service/database-service';
 import { DepartmentPage } from '../department/department';
 import { LocalStorageProvider } from '../../providers/local-storage/local-storage';
@@ -64,22 +64,18 @@ export class HomePage {
   	}
   	getDepartment(data)
   	{
-  		console.log(data)
   		if(data)
   		{
   			this._db.getDepartment(data).subscribe((response) =>{
-  			console.log(response)
   			this.deparmentList = response;
   		})
   		}
   	}
   	getCourses(data)
   	{
-  		console.log(data)
   		if(data)
   		{
   			this._db.getCourses(data).subscribe((response) =>{
-  			console.log(response)
   			this.coursesList = response;
   		})
   		}
@@ -91,12 +87,11 @@ export class HomePage {
     	{
     		this.navCtrl.push(this.deptPage, {sch_id: data});
     	}else{
-    		this.localStorage.showToast('Please select a School', 'bottom');
+    		this.localStorage.showToast('Please select a School', 'top');
     	}
   	}
     getLevels(data)
     {
-      console.log(data)
       this.loader = this.loadingCtrl.create({
         content: 'Please wait.. loading Courses',
         spinner: 'crescent'
@@ -106,7 +101,6 @@ export class HomePage {
       {
         this._db.getLevels(data).subscribe((response) =>{
         this.levelList = response;
-        console.log(this.levelList)
         this.loader.dismissAll();
       })
       }

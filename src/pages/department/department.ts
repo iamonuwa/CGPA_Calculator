@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DatabaseServiceProvider } from '../../providers/database-service/database-service';
 import { CgpCalculatorPage } from '../cgp-calculator/cgp-calculator';
+import { LocalStorageProvider } from '../../providers/local-storage/local-storage';
 
 /**
  * Generated class for the DepartmentPage page.
@@ -31,6 +32,7 @@ export class DepartmentPage {
   		public navParams: NavParams, 
     	private _db: DatabaseServiceProvider,
     	public loadingCtrl: LoadingController,
+      public localStorage: LocalStorageProvider,
     	private _fb: FormBuilder,
   		) {
   		this.sch_id = this.navParams.get('sch_id');
@@ -56,7 +58,6 @@ export class DepartmentPage {
 	      spinner: 'crescent'
 	    });
 	    this.loader.present();
-  		console.log(data)
   		if(data)
   		{
   			this._db.getDepartment(data).subscribe((response) =>{
@@ -68,9 +69,8 @@ export class DepartmentPage {
 
   	getLevels(data)
   	{
-  		console.log(data)
   		this.loader = this.loadingCtrl.create({
-	      content: 'Please wait.. loading Courses',
+	      content: 'Please wait.. loading Levels',
 	      spinner: 'crescent'
 	    });
 	    this.loader.present();
@@ -78,7 +78,6 @@ export class DepartmentPage {
   		{
   			this._db.getLevels(data).subscribe((response) =>{
   			this.levelList = response;
-  			console.log(this.levelList)
 		    this.loader.dismissAll();
   		})
   		}
@@ -86,8 +85,13 @@ export class DepartmentPage {
 
   	cgpaPage(data)
   	{
-  		console.log(data)
-      this.navCtrl.setRoot(this.cgpPage);
+      if(data.dept_id && data.level_id)
+      {
+        this.navCtrl.setRoot(this.cgpPage, {level_id: data.level_id, dept_id: data.dept_id});
+      } else{
+        this.localStorage.showToast('All Fields are Required', 'top')
+      }
+      
   	}
 
 }

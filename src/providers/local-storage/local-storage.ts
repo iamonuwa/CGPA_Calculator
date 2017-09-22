@@ -26,6 +26,6 @@ export class LocalStorageProvider {
       		  //closeButtonText: 'Ok',
 		      position: position,
 		    });
-		return toast.present();
+		return toast;
   }
 }

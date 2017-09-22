@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,  LoadingController,ToastController } from 'ionic-angular';
-import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { DatabaseServiceProvider } from '../../providers/database-service/database-service';
 import { DepartmentPage } from '../department/department';
 import { LocalStorageProvider } from '../../providers/local-storage/local-storage';
@@ -20,6 +20,9 @@ export class CgpCalculatorPage {
 
 	private cgpForm: FormGroup;
 	items;
+	private level_id;
+	private dept_id;
+	private courseList
   	constructor(
 	  	public navCtrl: NavController, 
 	  	public navParams: NavParams,
@@ -28,10 +31,13 @@ export class CgpCalculatorPage {
 	    private _fb: FormBuilder,
 		public localStorage: LocalStorageProvider
   		) {
+  		this.dept_id = this.navParams.get('dept_id');
+  		this.level_id = this.navParams.get('level_id');
+  		this.getCourses(this.level_id);
   	}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CgpCalculatorPage');
+    //console.log('ionViewDidLoad CgpCalculatorPage');
   }
 
   ngOnInit() {
@@ -72,4 +78,14 @@ export class CgpCalculatorPage {
         arrayControl.removeAt(index);
     }
 
+    getCourses(data)
+  	{
+  		if(data)
+  		{
+  			this._db.getCourses(data).subscribe((response) =>{
+  			this.courseList = response;
+  			console.log(this.courseList)
+  		})
+  		}
+  	}
 }
