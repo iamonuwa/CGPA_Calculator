@@ -23,12 +23,14 @@
 		<ion-col>Quiz</ion-col>
 		<ion-col>Exam</ion-col>
 		<ion-col>Total</ion-col>
+		<ion-col>Grade</ion-col>
 	</ion-row>
 	<ion-row *ngFor="let item of cgpData">
 		<ion-col>{{ item?.course_id.name}}</ion-col>
 		<ion-col>{{ item?.quiz_score }}</ion-col>
 		<ion-col>{{ item?.exam_score }}</ion-col>
 		<ion-col>{{ totalScore(item.quiz_score, item.exam_score) }}</ion-col>
+		<ion-col>{{ item?.grade }}</ion-col>
 	</ion-row>
 
 </ion-content>

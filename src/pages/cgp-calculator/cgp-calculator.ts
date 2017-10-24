@@ -55,6 +55,7 @@ export class CgpCalculatorPage {
         course_id: [null, Validators.compose([Validators.required])],
         exam_score: [null, Validators.compose([Validators.required])],
         quiz_score: [null, Validators.compose([Validators.required])],
+        //grade: [null, Validators.compose([Validators.required])],
   			//cgp : this._fb.array([ this.createItem() ])
   		})
   	}
