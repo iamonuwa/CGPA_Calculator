@@ -24,13 +24,13 @@
 	      <ion-item>
 	        <ion-label>Department</ion-label>
 	        <ion-select [(ngModel)]="dept" formControlName="dept_id" (ionChange) = "getLevels(dept)" interface="popover">
-	          <ion-option *ngFor="let item of deparmentList" value="{{item.$key}}">{{item.name}}</ion-option>
+	          <ion-option *ngFor="let item of deparmentList" value="{{ item.$key }}">{{item.name}}</ion-option>
 	        </ion-select>
 	      </ion-item>
 	      <ion-item>
 	        <ion-label>Level</ion-label>
 	        <ion-select formControlName="level_id" interface="popover">
-	          <ion-option *ngFor="let course of levelList" value="{{course.$key}}">{{course.name}}</ion-option>
+	          <ion-option *ngFor="let course of levelList" value="{{ course.$key }}">{{course.name}}</ion-option>
 	        </ion-select>
 	      </ion-item>
 	      <button type="submit" ion-button outline block color="secondary">Submit</button>

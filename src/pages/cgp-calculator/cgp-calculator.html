@@ -14,17 +14,25 @@
 
 
 <ion-content padding>
-	<form [formGroup] = "cgpForm" (ngSubmit)="addMultiClassFees(cgpForm.value)">
-		
-		<div formArrayName="fees" *ngFor="let item of cgpForm.get('fees').controls; let i = index;">
-		  <div [formGroupName]="i">
+	<ion-grid>
+		<ion-row>
+		    <ion-col col-6>{{ dept.name }}</ion-col>
+		    <ion-col col-6>{{ level.name }}</ion-col>
+		</ion-row>
+		<ion-row>
+		    
+		</ion-row>
+	</ion-grid>
+	<form [formGroup] = "cgpForm" (ngSubmit)="addGpCourse(cgpForm.value)">
+		<div>
+		  <div>
 		  	<ion-grid>
 		  		<ion-row>
 					<ion-col>
 						<ion-item>
 					        <ion-label floating>Courses</ion-label>
-					        <ion-select formControlName="ledger_id" interface="popover">
-					          <ion-option *ngFor="let item of courseList" value="{{item.$key}}">{{item.name}}</ion-option>
+					        <ion-select [(ngModel)]="course" formControlName="course_id" (ionChange)="selectCourse(course)" interface="popover">
+					          <ion-option *ngFor="let item of courseList" [value]="item">{{item.name}}</ion-option>
 					        </ion-select>
 					    </ion-item>
 					</ion-col>
@@ -35,22 +43,110 @@
 				<ion-col>
 					<ion-item>
 				        <ion-label floating>Quiz Score</ion-label>
-				        <ion-input type="text" formControlName="amount" name="" #course_unit></ion-input>
+				        <ion-input type="number" [(ngModel)]="quiz_score" formControlName="quiz_score" name=""></ion-input>
 				    </ion-item>
 				</ion-col>
 				<ion-col>
 					<ion-item>
 				        <ion-label floating>Exam Score</ion-label>
-              			<ion-input type="text" formControlName="description" name="" #course_unit></ion-input>
+              			<ion-input type="number" [(ngModel)]="exam_score" formControlName="exam_score" name="" ></ion-input>
 				    </ion-item>
 				</ion-col>
-				<button ion-button outline color="secondary" type="button" style="margin: auto;" (click)="deleteItem(i)"><ion-icon name="remove"></ion-icon></button>
-		</ion-row>
+				<ion-grid>
+					<ion-row text-center>
+					    <ion-col col-3 text-lg>
+					    	<label>Course Unit</label>
+					    	<br>
+					    	{{ selectedCourse?.unit || 0 }}
+					    </ion-col>
+					    <ion-col col-3>
+					    	<label>Score</label>
+					    	<br>
+					    	{{ (quiz_score*1 + exam_score*1 ) || 0 }}
+					    </ion-col>
+					    <ion-col col-3>
+					    	<label>Grade</label>
+					    	<br>
+					    	<div *ngIf="quiz_score || exam_score">{{ gradeCalculator(quiz_score*1 + exam_score*1) }}</div>
+					    </ion-col>
+					    <ion-col col-3>
+					    	<label>Grade Point</label>
+					    	<br>
+					    	<div *ngIf="quiz_score || exam_score">{{ gradePoint() }}</div>
+					    </ion-col>
+					</ion-row>
+					<ion-row>
+					    <button ion-button outline color="secondary" type="submit" style="margin: auto;" [disabled]="cgpForm.invalid"><ion-icon name=""></ion-icon>Save & Select Another Course</button>
+					</ion-row>
+				</ion-grid>
+			</ion-row>
 		    
 		    
 		    
 		  </div>
 	</div>
+		
+		<!-- <div formArrayName="cgp" *ngFor="let item of cgpForm.get('cgp').controls; let i = index;">
+		  <div [formGroupName]="i">
+		  	<ion-grid>
+		  		<ion-row>
+					<ion-col>
+						<ion-item>
+					        <ion-label floating>Courses</ion-label>
+					        <ion-select [(ngModel)]="course" formControlName="course_id" (ionChange)="selectCourse(course)" interface="popover">
+					          <ion-option *ngFor="let item of courseList" [value]="item">{{item.name}}</ion-option>
+					        </ion-select>
+					    </ion-item>
+					</ion-col>
+				</ion-row>
+		  	</ion-grid>
+
+			<ion-row>
+				<ion-col>
+					<ion-item>
+				        <ion-label floating>Quiz Score</ion-label>
+				        <ion-input type="number" [(ngModel)]="quiz_score" formControlName="quiz_score" name=""></ion-input>
+				    </ion-item>
+				</ion-col>
+				<ion-col>
+					<ion-item>
+				        <ion-label floating>Exam Score</ion-label>
+              			<ion-input type="number" [(ngModel)]="exam_score" formControlName="exam_score" name="" ></ion-input>
+				    </ion-item>
+				</ion-col>
+				<ion-grid>
+					<ion-row text-center>
+					    <ion-col col-3 text-lg>
+					    	<label>Course Unit</label>
+					    	<br>
+					    	{{ selectedCourse?.unit || 0 }}
+					    </ion-col>
+					    <ion-col col-3>
+					    	<label>Score</label>
+					    	<br>
+					    	{{ (quiz_score*1 + exam_score*1 ) || 0 }}
+					    </ion-col>
+					    <ion-col col-3>
+					    	<label>Grade</label>
+					    	<br>
+					    	<div *ngIf="quiz_score || exam_score">{{ gradeCalculator(quiz_score*1 + exam_score*1) }}</div>
+					    </ion-col>
+					    <ion-col col-3>
+					    	<label>Grade Point</label>
+					    	<br>
+					    	<div *ngIf="quiz_score || exam_score">{{ gradePoint() }}</div>
+					    </ion-col>
+					</ion-row>
+					<ion-row>
+					    <button ion-button outline color="secondary" type="submit" style="margin: auto;"><ion-icon name=""></ion-icon>Save & Select Another Course</button>
+					</ion-row>
+				</ion-grid>
+			</ion-row>
+		    
+		    
+		    
+		  </div>
+	</div> -->
 <!-- 	<div class="col-md-12">
 		<div class="row">
 			<div class="col-md-6">
@@ -75,6 +171,6 @@
 		<ion-toolbar>
 			<button ion-button outline color="secondary" (click)="addItem()"><ion-icon name="ios-add"></ion-icon></button>
 			<button ion-button outline  color="secondary"><i class="fa fa-plus"></i>Spillover</button>
-			<button ion-button outline  color="secondary" (click)="addItem()"><i class="fa fa-plus"></i>Done</button>
+			<button ion-button outline  color="secondary" (click)="editCgpModal()"><i class="fa fa-plus"></i>Done</button>
 		</ion-toolbar>
 	</ion-footer>

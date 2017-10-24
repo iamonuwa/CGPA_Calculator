@@ -15,11 +15,12 @@ export class HomePage {
 	private deptPage;
 	private loader;
   private levelList;
+  
   	constructor(
   		public navCtrl: NavController, 
   		private _db: DatabaseServiceProvider, 
   		public loadingCtrl: LoadingController,
-  		public localStorage: LocalStorageProvider
+  		public storage: LocalStorageProvider
   		) 
   	{
   		this.getUniversities();
@@ -87,7 +88,7 @@ export class HomePage {
     	{
     		this.navCtrl.push(this.deptPage, {sch_id: data});
     	}else{
-    		this.localStorage.showToast('Please select a School', 'top');
+    		this.storage.showToast('Please select a School', 'top');
     	}
   	}
     getLevels(data)

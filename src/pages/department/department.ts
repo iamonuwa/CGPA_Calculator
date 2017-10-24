@@ -87,7 +87,7 @@ export class DepartmentPage {
   	{
       if(data.dept_id && data.level_id)
       {
-        this.navCtrl.push(this.cgpPage, {level_id: data.level_id, dept_id: data.dept_id});
+        this.navCtrl.push(this.cgpPage, {level_id: data.level_id, dept_id: data.dept_id, data: data});
       } else{
         this.localStorage.showToast('All Fields are Required', 'top')
       }

@@ -11,6 +11,8 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { DepartmentPage } from '../pages/department/department';
 import { CgpCalculatorPage } from '../pages/cgp-calculator/cgp-calculator';
+import { EditCgpPage } from '../pages/edit-cgp/edit-cgp';
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { environment } from '../environments/environment';
@@ -24,6 +26,7 @@ import { LocalStorageProvider } from '../providers/local-storage/local-storage';
     ListPage,
     DepartmentPage,
     CgpCalculatorPage,
+    EditCgpPage,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,7 @@ import { LocalStorageProvider } from '../providers/local-storage/local-storage';
     ListPage,
     DepartmentPage,
     CgpCalculatorPage,
+    EditCgpPage
   ],
   providers: [
     StatusBar,

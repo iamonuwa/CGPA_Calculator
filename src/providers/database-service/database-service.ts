@@ -29,6 +29,14 @@ export class DatabaseServiceProvider {
         }
       });//.map(response => {response});
     }
+    getSingleDept(key)
+    {
+      return this.db.object(`departments/${key}`)
+    }
+    getSingleLevel(key)
+    {
+      return this.db.object(`levels/${key}`)
+    }
     getLevels(data)
     {
       return this.db.list('/levels', {

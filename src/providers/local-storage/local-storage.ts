@@ -15,7 +15,6 @@ export class LocalStorageProvider {
   constructor(
   		public toastCtrl: ToastController
   	) {
-    console.log('Hello LocalStorageProvider Provider');
   }
   showToast(message: string, position: string)
   {
